@@ -2,10 +2,10 @@
   padding: 30px;
 }
 
-.movies {
-  list-style: circle;
-  padding-left: 2em;
-  padding-top: 10px;
+.description {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 20px;
 }
 
 .link {

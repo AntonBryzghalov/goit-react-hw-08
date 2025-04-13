@@ -38,3 +38,27 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+.link {
+  font-size: 20px;
+  padding: 10px 15px;
+  text-decoration: underline;
+  color: darkblue;
+}
+
+.link-active {
+  border-color: orangered;
+  text-decoration: none;
+  color: orangered;
+  border-bottom: none;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.centered {
+  margin: 0 auto;
+  text-align: center;
+}

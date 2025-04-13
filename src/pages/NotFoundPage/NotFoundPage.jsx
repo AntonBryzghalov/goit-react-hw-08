@@ -9,7 +9,7 @@ function NotFoundPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate(location.state ?? "/", { replace: true });
-    }, 10000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [location, navigate]);
@@ -20,7 +20,7 @@ function NotFoundPage() {
       <Link to="/" className={css.link} replace>
         go to main page
       </Link>{" "}
-      or you will be redirected in 10 seconds automatically
+      or you will be redirected in 5 seconds automatically
     </div>
   );
 }
