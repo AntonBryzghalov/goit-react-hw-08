@@ -5,8 +5,8 @@ import {
   selectContactsError,
   selectFilteredContacts,
   selectContactsLoading,
-} from "../../redux/contactsSlice";
-import { genericErrorMessage } from "../../redux/contactsOps";
+} from "../../redux/contacts/selectors";
+import { genericErrorMessage } from "../../redux/contacts/operations";
 
 function ContactList() {
   const filteredContacts = useSelector(selectFilteredContacts);

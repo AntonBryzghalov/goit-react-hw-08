@@ -1,18 +1,18 @@
-import { Field, Form, Formik, ErrorMessage } from "formik";
-import css from "./ContactForm.module.css";
-import * as yup from "yup";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useId } from "react";
-import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contacts/operations";
+import * as yup from "yup";
 import {
   LONG_ERROR_MESSAGE,
   REQUIRED_ERROR_MESSAGE,
   SHORT_ERROR_MESSAGE,
 } from "../../js/errorMessages";
+import { useDispatch } from "react-redux";
+import css from "./RegistrationPage.module.css";
 
 const initialValues = {
   name: "",
-  number: "",
+  email: "",
+  password: "",
 };
 
 const validationSchema = yup.object().shape({
@@ -21,23 +21,28 @@ const validationSchema = yup.object().shape({
     .min(3, SHORT_ERROR_MESSAGE)
     .max(50, LONG_ERROR_MESSAGE)
     .required(REQUIRED_ERROR_MESSAGE),
-  number: yup
+  email: yup
     .string()
     .min(3, SHORT_ERROR_MESSAGE)
     .max(50, LONG_ERROR_MESSAGE)
     .required(REQUIRED_ERROR_MESSAGE),
+  password: yup
+    .string()
+    .min(8, SHORT_ERROR_MESSAGE)
+    .max(20, LONG_ERROR_MESSAGE)
+    .required(REQUIRED_ERROR_MESSAGE),
 });
 
-function ContactForm() {
+function RegistrationForm() {
   const dispatch = useDispatch();
 
   function handleSubmit(values, actions) {
-    const newRecord = {
+    const newUserCredentials = {
       name: values.name,
-      number: values.number,
+      email: values.email,
+      password: values.password,
     };
-
-    dispatch(addContact(newRecord));
+    dispatch(register(newUserCredentials));
     actions.resetForm();
   }
 
@@ -56,14 +61,23 @@ function ContactForm() {
           <ErrorMessage name="name" component="span" className={css.error} />
         </div>
         <div className={css["field-container"]}>
-          <label htmlFor={formId + "-number"}>Number</label>
-          <Field name="number" id={formId + "-number"} />
-          <ErrorMessage name="number" component="span" className={css.error} />
+          <label htmlFor={formId + "-email"}>Email</label>
+          <Field type="email" name="email" id={formId + "-email"} />
+          <ErrorMessage name="email" component="span" className={css.error} />
         </div>
-        <button type="submit">Add Contact</button>
+        <div className={css["field-container"]}>
+          <label htmlFor={formId + "-password"}>Password</label>
+          <Field type="password" name="password" id={formId + "-password"} />
+          <ErrorMessage
+            name="password"
+            component="span"
+            className={css.error}
+          />
+        </div>
+        <button type="submit">Register</button>
       </Form>
     </Formik>
   );
 }
 
-export default ContactForm;
+export default RegistrationForm;

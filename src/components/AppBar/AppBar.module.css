@@ -1,0 +1,26 @@
+.bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.link {
+  font-size: 20px;
+  padding: 10px 15px;
+  text-decoration: underline;
+  color: darkblue;
+}
+
+.active {
+  border-color: orangered;
+  text-decoration: none;
+  color: orangered;
+  border-bottom: none;
+}

@@ -1,12 +1,19 @@
-import ContactForm from "../ContactForm/ContactForm";
-import SearchBox from "../SearchBox/SearchBox";
-import ContactList from "../ContactList/ContactList";
-import css from "./App.module.css";
-import { fetchContacts } from "../../redux/contactsOps";
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { fetchContacts } from "../../redux/contacts/operations";
+import AppBar from "../AppBar/AppBar";
+import Layout from "../Layout/Layout";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
+  const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
+  const ContactsPage = lazy(() =>
+    import("../../pages/ContactsPage/ContactsPage")
+  );
+  const NotFoundPage = lazy(() =>
+    import("../../pages/NotFoundPage/NotFoundPage")
+  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,12 +21,21 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className={css.phonebook}>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <SearchBox />
-      <ContactList />
-    </div>
+    <>
+      <Layout>
+        <AppBar />
+      </Layout>
+
+      <Layout>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/contacts" element={<ContactsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
+      </Layout>
+    </>
   );
 }
 
