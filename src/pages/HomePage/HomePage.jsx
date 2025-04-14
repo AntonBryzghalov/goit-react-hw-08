@@ -24,7 +24,8 @@ function HomePage() {
           or{" "}
           <Link className={css.link} to="/login">
             Log In
-          </Link>
+          </Link>{" "}
+          to use the app.
         </p>
       )}
     </div>

@@ -4,7 +4,7 @@ import { logout } from "../../redux/auth/operations";
 
 function UserMenu() {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser());
+  const user = useSelector(selectUser);
 
   function handleLogout() {
     dispatch(logout());
@@ -12,7 +12,7 @@ function UserMenu() {
 
   return (
     <div>
-      <p>Welcome {user.name}</p>
+      <p>Welcome, {user.name}</p>
       <button onClick={handleLogout}>Log out</button>
     </div>
   );

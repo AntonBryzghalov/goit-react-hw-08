@@ -1,3 +1,1 @@
-export function selectFilterByName(state) {
-  return state.filters.name;
-}
+export const selectFilterByName = (state) => state.filters.name;

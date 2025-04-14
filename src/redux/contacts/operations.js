@@ -18,6 +18,11 @@ export const deleteContact = generateThunk("contacts/delete", (contactId) => {
   return axios.delete(`/contacts/${contactId}`);
 });
 
+export const updateContact = generateThunk("contacts/update", (contact) => {
+  const data = { name: contact.name, number: contact.number };
+  return axios.patch(`/contacts/${contact.id}`, data);
+});
+
 function generateThunk(name, requestFunc) {
   return createAsyncThunk(name, async (arg, thunkAPI) => {
     try {

@@ -1,4 +1,4 @@
-import { Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "./LoginForm.module.css";
 import * as yup from "yup";
 import {
@@ -52,15 +52,29 @@ function LoginForm() {
       <Form className={css.form}>
         <div className={css["field-container"]}>
           <label htmlFor={formId + "-email"}>Email</label>
-          <input type="email" name="email" id={formId + "-email"} />
+          <Field
+            type="email"
+            name="email"
+            id={formId + "-email"}
+            autoComplete="email"
+          />
+          <ErrorMessage name="email" component="span" className={css.error} />
         </div>
         <div className={css["field-container"]}>
           <label htmlFor={formId + "-password"}>Password</label>
-          <input type="password" name="password" id={formId + "-password"} />
+          <Field
+            type="password"
+            name="password"
+            id={formId + "-password"}
+            autoComplete="current-password"
+          />
+          <ErrorMessage
+            name="password"
+            component="span"
+            className={css.error}
+          />
         </div>
-        <div className={css["field-container"]}>
-          <button type="submit">Log in</button>
-        </div>
+        <button type="submit">Log in</button>
       </Form>
     </Formik>
   );
