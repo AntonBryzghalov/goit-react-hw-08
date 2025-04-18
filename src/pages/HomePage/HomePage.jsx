@@ -18,7 +18,7 @@ function HomePage() {
       ) : (
         <p className={css.description}>
           You should{" "}
-          <Link className={css.link} to="/registration">
+          <Link className={css.link} to="/register">
             Register
           </Link>{" "}
           or{" "}

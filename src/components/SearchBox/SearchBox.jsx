@@ -14,7 +14,7 @@ function SearchBox() {
   return (
     <div>
       <label htmlFor={id} className={css.label}>
-        Find contacts by name
+        Find contacts
       </label>
       <input
         id={id}
