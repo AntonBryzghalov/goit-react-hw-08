@@ -4,11 +4,14 @@ import Layout from "../Layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import RestrictedRoute from "../RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { refreshUser } from "../../redux/auth/operations";
+import { selectAuthLoading } from "../../redux/auth/selectors";
+import LoadingModal from "../LoadingModal/LoadingModal";
 
 function App() {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectAuthLoading);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -67,6 +70,7 @@ function App() {
           </Routes>
         </Suspense>
       </Layout>
+      {isLoading && <LoadingModal />}
     </>
   );
 }
