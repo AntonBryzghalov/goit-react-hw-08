@@ -8,14 +8,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { refreshUser } from "../../redux/auth/operations";
 import { selectAuthLoading } from "../../redux/auth/selectors";
 import LoadingModal from "../LoadingModal/LoadingModal";
+import { useRef } from "react";
 
 function App() {
   const dispatch = useDispatch();
+  const dispatchRef = useRef(dispatch); // used to remove dependencies from effect
   const isLoading = useSelector(selectAuthLoading);
 
   useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
+    dispatchRef.current(refreshUser());
+  }, []);
 
   const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
   const ContactsPage = lazy(() =>

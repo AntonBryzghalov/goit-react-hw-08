@@ -1,12 +1,9 @@
 import { PacmanLoader } from "react-spinners";
-import Modal from "react-modal";
-import css from "./LoadingModal.module.css";
-
-Modal.setAppElement("#root");
+import ModalWrapper from "../ModalWrapper/ModalWrapper";
 
 function LoadingModal() {
   return (
-    <Modal isOpen={true} className={css.modal}>
+    <ModalWrapper>
       <PacmanLoader
         color={"#FB0"}
         loading={true}
@@ -14,7 +11,7 @@ function LoadingModal() {
         aria-label="Loading Spinner"
         data-testid="loader"
       />
-    </Modal>
+    </ModalWrapper>
   );
 }
 

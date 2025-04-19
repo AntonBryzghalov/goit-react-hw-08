@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, addContact, deleteContact } from "./operations";
+import {
+  fetchContacts,
+  addContact,
+  deleteContact,
+  updateContact,
+} from "./operations";
 import { logout } from "../auth/operations";
 
 const slice = createSlice({
@@ -8,6 +13,16 @@ const slice = createSlice({
     items: [],
     loading: false,
     error: null,
+    deleteItemId: null,
+    editItemId: null,
+  },
+  reducers: {
+    setDeleteContactId: (state, action) => {
+      state.deleteItemId = action.payload;
+    },
+    setEditContactId: (state, action) => {
+      state.editItemId = action.payload;
+    },
   },
   extraReducers: (builder) => {
     buildReducers(builder, fetchContacts, (state, action) => {
@@ -22,6 +37,16 @@ const slice = createSlice({
       state.items = state.items.filter(
         (contact) => contact.id !== action.payload.id
       );
+    });
+
+    buildReducers(builder, updateContact, (state, action) => {
+      var updatedContact = action.payload;
+      for (let i = 0; i < state.items.length; i++) {
+        if (state.items[i].id !== updatedContact.id) continue;
+
+        state.items[i] = updatedContact;
+        break;
+      }
     });
 
     builder.addCase(logout.fulfilled, (state) => {
@@ -47,3 +72,5 @@ function buildReducers(builder, operation, reducerFunc) {
 }
 
 export default slice.reducer;
+
+export const { setDeleteContactId, setEditContactId } = slice.actions;
